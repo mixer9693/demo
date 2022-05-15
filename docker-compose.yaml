@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  db:
+    container_name: demo-postgres
+    build: ./docker/postgres
+    restart: unless-stopped
+    ports:
+      - '5434:5432'
+    volumes:
+      - ./docker/data/postgres:/var/lib/postgresql
+      - ./docker/postgres:/docker-entrypoint-initdb.d/
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootroot
+      TZ: "Europe/Moscow"
+  rabbitmq:
+    container_name: demo-rabbitmq
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - './docker/data/rabbitmq:/var/lib/rabbitmq/mnesia/'
+
