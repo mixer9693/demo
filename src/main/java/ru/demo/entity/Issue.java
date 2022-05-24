@@ -1,6 +1,7 @@
 package ru.demo.entity;
 
 import lombok.Data;
+import ru.demo.enums.IssueStatus;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,12 +17,17 @@ public class Issue {
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id")
     private IssueType type;
-    @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private IssueStatus status;
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private User author;
+    private String text;
     @OneToMany(mappedBy = "issue", fetch = FetchType.LAZY)
     private List<Comment> comments;
+
+    @PrePersist
+    public void prePersist(){
+        this.status = IssueStatus.NEW;
+    }
 }
