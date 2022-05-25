@@ -6,6 +6,7 @@ import ru.demo.dto.CommentInputDto;
 import ru.demo.dto.CommentOutputDto;
 import ru.demo.service.CommentService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/issues/{id}/comments")
-    public CommentOutputDto create(@PathVariable("id") Integer issueId, @RequestBody CommentInputDto commentDto){
+    public CommentOutputDto create(@PathVariable("id") Integer issueId, @Valid @RequestBody CommentInputDto commentDto){
         return commentService.create(issueId, commentDto);
     }
 
@@ -25,7 +26,7 @@ public class CommentController {
     }
 
     @PatchMapping("/comments/{id}")
-    public CommentOutputDto update(@PathVariable Integer id, @RequestBody CommentInputDto commentDto) {
+    public CommentOutputDto update(@PathVariable Integer id, @Valid @RequestBody CommentInputDto commentDto) {
         return commentService.update(id, commentDto);
     }
 }
