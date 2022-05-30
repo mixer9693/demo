@@ -1,8 +1,7 @@
 package ru.demo.mapper;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mapstruct.factory.Mappers;
 import ru.demo.dto.CommentInputDto;
 import ru.demo.dto.CommentOutputDto;
 import ru.demo.entity.Comment;
@@ -13,11 +12,9 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class CommentMapperTest {
 
-    @Autowired
-    private CommentMapper mapper;
+    private final CommentMapper mapper = Mappers.getMapper(CommentMapper.class);
 
     @Test
     void dtoToComment() {
