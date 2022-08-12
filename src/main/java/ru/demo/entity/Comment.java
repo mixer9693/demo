@@ -21,4 +21,9 @@ public class Comment {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private User author;
     private LocalDateTime dateTime;
+
+    @PrePersist
+    public void prePersist(){
+        this.dateTime = LocalDateTime.now();
+    }
 }
