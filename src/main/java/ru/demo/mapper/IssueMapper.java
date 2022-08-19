@@ -12,6 +12,7 @@ public interface IssueMapper {
     Issue dtoToIssue(IssueInputDto dto);
 
     @Mapping(source = "type.id", target = "typeId")
+    @Mapping(source = "author.id", target = "authorId")
     IssueOutputDto issueToDto(Issue issue);
 
     default Issue idToIssue(Integer id){

@@ -29,3 +29,7 @@ spring:
       user: root
       password: rootroot
       baseline-on-migrate: true
+
+jwt:
+  secret: 1de$$fr
+  lifetime: 10000
